@@ -1,0 +1,110 @@
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background-color: #f8f8f8;
+}
+
+#formatacao {
+  margin: 10px 10px 10px 10px;
+  display: inline-block;
+}
+.caixa {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.imagem {
+  margin: 0 20px;
+}
+.header {
+  background-color: #c5c6c8; 
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  margin-left: 10px;
+  margin-right: 5px;
+  border-radius: 25px;
+}
+#logo{
+  margin-left: 25px;
+  margin-top: 12px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-family: Bombing;
+  color: #151D3B;
+}
+#quebratexto {
+  margin: 10px 10px 10px 10px;
+  width: 500px;
+  height: 150px;
+  position: right;
+  display: inline-block;
+  background-color: brown;
+}
+#div { 
+  display: inline-block;
+  size: 100px;
+}
+#decria {
+  display: inline-block;
+	list-style-type: none;
+	text-align: center;
+	margin-right: 650px;
+	padding: 14px 14px 14px 14px;
+	width: 700px;
+	overflow: hidden;
+	background-color: rgb(255, 255, 255);
+	border-style: solid;
+	border-color: rgb(0, 0, 0);
+}
+@font-face{
+  font-family: Bombing;
+  src: url("Bombing.ttf");
+}
+#footer {
+	background-color: #333;
+	color: #fff;
+	padding: 20px;
+	text-align: center;
+	margin-top: 50px;
+}
+
+#ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+#li {
+	display: inline-block;
+	margin: 0 10px;
+}
+
+#a {
+	color: #fff;
+	text-decoration: none;
+}
+.navbar {
+  background-color: #999999; /* Cor de fundo da barra de navegação */
+  border: 1px solid #0F1324; /* Borda inferior cinza claro */
+  border-radius: 20px;
+  margin-top: 7px;
+}
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+.imagem {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 150px;
+  margin-top: 12px;
+}
+.navbar-brand:last-child {
+  margin-left: auto; /* Mover o ícone de perfil para a direita */
+}
