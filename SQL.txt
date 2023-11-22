@@ -1,0 +1,158 @@
+create schema task;
+use task;
+
+CREATE TABLE usuarios(
+  id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  nome varchar(220) NOT NULL,
+  email varchar(220) NOT NULL
+);
+
+CREATE TABLE users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    login VARCHAR(255) NOT NULL,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    senha VARCHAR(255) NOT NULL,
+    cpf VARCHAR(11) NOT NULL,
+    address VARCHAR(255) NOT NULL,
+    class VARCHAR(255) NOT NULL,
+    registration_number VARCHAR(20) NOT NULL,
+    profile_photo LONGBLOB
+);
+
+CREATE TABLE tasks (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    descricao TEXT NOT NULL,
+    priority ENUM('high', 'medium', 'low') NOT NULL,
+    status ENUM('pending', 'in_progress', 'completed') NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE task_assignments (
+  id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  task_id INT NOT NULL,
+  user_id INT NOT NULL,
+  FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE notifications (
+  id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  task_id INT NOT NULL,
+  user_id INT NOT NULL,
+  message TEXT NOT NULL,
+  sent_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE user_tasks (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  task_id INT NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+  FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE
+);
+
+-- Inserts para a tabela users ------------------------------------------------------------
+INSERT INTO users (login, username, senha, cpf, address, class, registration_number, profile_photo)
+VALUES ('usuario1', 'Dheniel Rodrigues', SHA2('senha1', 256), '12345678901', 'Rua A, 123', 'Classe A', 'REG001', LOAD_FILE('Cxampphtdocstasksrcimgdefault_pic.png'));
+
+INSERT INTO users (login, username, senha, cpf, address, class, registration_number, profile_photo)
+VALUES ('usuario2', 'Ciclana Santos', SHA2('senha2', 256), '98765432109', 'Rua B, 456', 'Classe B', 'REG002', LOAD_FILE('Cxampphtdocstasksrcimgdefault_pic.png'));
+
+INSERT INTO users (login, username, senha, cpf, address, class, registration_number, profile_photo)
+VALUES ('usuario3', 'Beltrano Oliveira', SHA2('senha3', 256), '76543210987', 'Rua C, 789', 'Classe C', 'REG003', LOAD_FILE('Cxampphtdocstasksrcimgdefault_pic.png'));
+
+INSERT INTO users (login, username, senha, cpf, address, class, registration_number, profile_photo)
+VALUES ('usuario4', 'Maria Souza', SHA2('senha4', 256), '54321098765', 'Rua D, 012', 'Classe D', 'REG004', LOAD_FILE('Cxampphtdocstasksrcimgdefault_pic.png'));
+
+INSERT INTO users (login, username, senha, cpf, address, class, registration_number, profile_photo)
+VALUES ('usuario5', 'João Pereira', SHA2('senha5', 256), '32109876543', 'Rua E, 345', 'Classe E', 'REG005', LOAD_FILE('Cxampphtdocstasksrcimgdefault_pic.png'));
+
+-- Inserts para a tabela tasks ------------------------------------------------------------
+
+INSERT INTO tasks (user_id, descricao, priority, status)
+VALUES (1, 'Tarefa 1', 'high', 'pending');
+
+INSERT INTO tasks (user_id, descricao, priority, status)
+VALUES (2, 'Tarefa 2', 'medium', 'in_progress');
+
+INSERT INTO tasks (user_id, descricao, priority, status)
+VALUES (3, 'Tarefa 3', 'low', 'completed');
+
+INSERT INTO tasks (user_id, descricao, priority, status)
+VALUES (4, 'Tarefa 4', 'medium', 'pending');
+
+INSERT INTO tasks (user_id, descricao, priority, status)
+VALUES (5, 'Tarefa 5', 'high', 'in_progress');
+
+-- Inserts para a tabela  task_assignments ------------------------------------------------------------
+INSERT INTO task_assignments (task_id, user_id)
+VALUES (1, 1);
+
+INSERT INTO task_assignments (task_id, user_id)
+VALUES (2, 2);
+
+INSERT INTO task_assignments (task_id, user_id)
+VALUES (3, 3);
+
+INSERT INTO task_assignments (task_id, user_id)
+VALUES (4, 4);
+
+INSERT INTO task_assignments (task_id, user_id)
+VALUES (5, 5);
+
+-- Inserts para a tabela notifications ------------------------------------------------------------
+INSERT INTO notifications (task_id, user_id, message)
+VALUES (1, 1, 'Notificação 1');
+
+INSERT INTO notifications (task_id, user_id, message)
+VALUES (2, 2, 'Notificação 2');
+
+INSERT INTO notifications (task_id, user_id, message)
+VALUES (3, 3, 'Notificação 3');
+
+INSERT INTO notifications (task_id, user_id, message)
+VALUES (4, 4, 'Notificação 4');
+
+INSERT INTO notifications (task_id, user_id, message)
+VALUES (5, 5, 'Notificação 5');
+
+-- Inserts para a tabela user_tasks ------------------------------------------------------------
+INSERT INTO user_tasks (user_id, task_id)
+VALUES (1, 1);
+
+INSERT INTO user_tasks (user_id, task_id)
+VALUES (2, 2);
+
+INSERT INTO user_tasks (user_id, task_id)
+VALUES (3, 3);
+
+INSERT INTO user_tasks (user_id, task_id)
+VALUES (4, 4);
+
+INSERT INTO user_tasks (user_id, task_id)
+VALUES (5, 5);
+
+INSERT INTO `usuarios` (`id`, `nome`, `email`) VALUES
+(1, 'Cesar', 'cesar@gmail.com'),
+(2, 'Jessica', 'jessica@gmail.com'),
+(3, 'Kelly', 'kelly@gmail.com'),
+(4, 'Cesar2', 'cesar2@gmail.com'),
+(5, 'Jessica2', 'jessica2@gmail.com'),
+(6, 'Kelly2', 'kelly2@gmail.com'),
+(7, 'Cesar3', 'cesar3@gmail.com'),
+(8, 'Jessica3', 'jessica3@gmail.com'),
+(9, 'Kelly3', 'kelly3@gmail.com'),
+(10, 'Cesar4', 'cesar4@gmail.com'),
+(11, 'Jessica4', 'jessica4@gmail.com'),
+(12, 'Kelly4', 'kelly4@gmail.com'),
+(13, 'Cesar5', 'cesar5@gmail.com'),
+(14, 'Jessica5', 'jessica5@gmail.com'),
+(15, 'Kelly5', 'kelly5@gmail.com');
+
+
+

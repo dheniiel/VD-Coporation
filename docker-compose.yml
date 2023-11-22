@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  apache:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8081:80"
+    volumes:
+      - ./html:/var/www/html
+
+  db:
+    image: mariadb:10.5
+    container_name: "mariadb-server"
+    restart: always
+    volumes:
+      - ./code/db/banco.sql:/docker-entrypoint-initdb.d/banco.sql
+    environment:
+      - MARIADB_USER=root
+      - MARIADB_ROOT_PASSWORD=123
+    ports:
+      - 3307:3306
+  
+  adminer:
+    image: adminer:4.8.1
+    container_name: "adminer"
+    restart: always
+    ports:
+      - 8080:8080
